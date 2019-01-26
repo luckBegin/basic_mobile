@@ -6,10 +6,12 @@
 </template>
 
 <script lang="ts">
+
 import { Component, Vue } from "vue-property-decorator";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 import {HTTP, HttpHeaders, HttpParams} from "@/service/BasicHttp.class";
 import { RESPONSE } from '@/model';
+import { JsBridgeService  , JsCallService } from '@/service/device';
 @Component({
 	components: {
 		HelloWorld,
@@ -32,6 +34,8 @@ export default class Home extends Vue {
 			.subscribe( ( res : RESPONSE ) => {
 			    console.log(res) ;
 			})
+
+		JsBridgeService.getNum() ;
 	}
 }
 </script>
