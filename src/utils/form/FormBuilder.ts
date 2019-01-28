@@ -25,7 +25,7 @@ class FormControl implements control{
         this.validators = validators ;
         this.notify = notify ;
         this.name = name ;
-        this.validate() ;
+        this.validate()
     };
 
     public set value( value : any ){
@@ -41,6 +41,7 @@ class FormControl implements control{
         this.event$
             .pipe( debounceTime(300))
             .subscribe( data => {
+                console.log(data) ;
                 const obsrs : any[] = [] ;
 
                 this.validators.forEach( item => {
@@ -71,9 +72,6 @@ export class FormGroup {
 
     public event$ : Subject< any > = new Subject() ;
 
-    private controlsValid : { [ name : string] : boolean } = {} ;
-
-
     constructor(form : object ) {
 
         if(form){
@@ -85,11 +83,10 @@ export class FormGroup {
 
         this.event$
             .subscribe( data => {
-                this.controlsValid[data.key] = data.value ;
                 const result : boolean[] = [] ;
 
-                Object.keys( this.controlsValid ).forEach( key => {
-                    result.push( this.controlsValid[key] ) ;
+                Object.keys( this.controls ).forEach( key => {
+                    result.push( this.controls[key].valid ) ;
                 });
 
                 const hasFalse = result.indexOf( false ) ;

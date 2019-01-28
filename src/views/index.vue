@@ -56,6 +56,7 @@
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator";
 import {JsCallService} from "@/service/device";
+import {LocalStorageService} from '@/service/storage';
 function randomNum(minNum: any, maxNum: any): any {
 	switch (arguments.length) {
 		case 1:
@@ -93,10 +94,17 @@ export default class Index extends Vue {
 	toast_show(str: string, mark: boolean) : void {
 		const _this = this;
 		this.toast_title = str;
-		this.toast_control = mark;
+		this.toast_control = true;
 	} ;
 
 	go(i: number, msg: string) : void {
+	    const count = LocalStorageService.get("count") ;
+
+	    if(count > 3 ){
+	        this.toast_show("抽奖次数耗尽" , true );
+	        return ;
+		};
+
 		let el = document.querySelector(".pointerWrap") as HTMLDivElement;
 
 		let deg = 360 * 3 + 60 * i;
@@ -113,6 +121,8 @@ export default class Index extends Vue {
 	};
 
 	makeAward() : void {
+	    const count = LocalStorageService.get("count") || 0 ;
+	    LocalStorageService.set("count" , count / 1 + 1) ;
 		this.go(3, "看起来运气不太好呢,抽中了谢谢参与");
 	}
 

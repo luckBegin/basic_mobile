@@ -3,10 +3,11 @@
 		<img alt="Vue logo" src="../assets/logo.png">
 		<HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
 		<form id="form">
-			<input type="text" formcontrol = 'data' v-model="form.controls.data.value">
-			{{ form.controls.data.value }}
+			<input type="text" v-model="form.controls.data.value">
+			<input type="text" v-model="form.controls.info.value">
+			{{ form.controls.data.info }}
 			<span>
-				{{ form.controls.data.valid }}
+				{{ form.valid }}
 			</span>
 		</form>
 		<button @click="submit()"> 确定 </button>
@@ -25,7 +26,8 @@ import { Validators } from '@/utils/form/Validator';
 })
 export default class Home extends Vue {
     form : FormGroup = new FormGroup({
-        data : [ ""  , [ Validators.required ] ]
+        info : [ ""  , [ Validators.min(5) ] ] ,
+        data : [ ""  , [ Validators.required ] ] ,
 	});
     created() : void {
         // HTTP.setHeader("Accept-Language" ,"en-us")
@@ -48,8 +50,8 @@ export default class Home extends Vue {
 	}
 
     submit() :void{
-        this.form.patchValue({ data : 123 }) ;
-        // console.log( this.form.value() ) ;
+        // this.form.patchValue({ data : 123 }) ;
+        console.log( this.form ) ;
 	}
 }
 </script>
