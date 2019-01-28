@@ -19,23 +19,29 @@ import { JsBridgeService  , JsCallService } from '@/service/device';
 })
 export default class Home extends Vue {
     created() : void {
-        HTTP.setHeader("Accept-Language" ,"en-us")
+        // HTTP.setHeader("Accept-Language" ,"en-us")
+		//
+		// const header = new HttpHeaders()
+		// 	.set("Content-type" , "application/xml") ;
+		//
+        // const para = new HttpParams()
+		// 	.set("a" , "1") ;
+		//
+		// HTTP.get("http://10.0.40.106:8302/recommend/list" , {
+		//     headers : header ,
+		// 	params : para
+		// })
+		// 	.subscribe( ( res : RESPONSE ) => {
+		// 	    console.log(res) ;
+		// 	})
+		//
+		// JsBridgeService.getNum() ;
+		const event$ = JsCallService.event$
+			.subscribe( event => {
+			    console.log(event) ;
+			});
 
-		const header = new HttpHeaders()
-			.set("Content-type" , "application/xml") ;
-
-        const para = new HttpParams()
-			.set("a" , "1") ;
-
-		HTTP.get("http://10.0.40.106:8302/recommend/list" , {
-		    headers : header ,
-			params : para
-		})
-			.subscribe( ( res : RESPONSE ) => {
-			    console.log(res) ;
-			})
-
-		JsBridgeService.getNum() ;
+		// event$.unsubscribe() ;
 	}
 }
 </script>

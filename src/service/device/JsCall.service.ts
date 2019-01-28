@@ -2,7 +2,7 @@ import {Subject} from 'rxjs';
 
 class JsCall {
 
-    private event$  : Subject< any > = new Subject() ;
+    public readonly event$  : Subject< any > = new Subject() ;
 
     constructor(){
     }
@@ -22,7 +22,10 @@ class JsCall {
     }
 
     private getA( data : any ){
-        console.log(data) ;
+        this.event$.next({
+            event : "getA" ,
+            data : data
+        });
     }
 }
 
