@@ -82,8 +82,8 @@ export default class Index extends Vue {
 	created(): void {
 		this.fadeNum();
 		JsCallService.event$
-			.subscribe( event => {
-			    console.log(event) ;
+			.subscribe( (event : any) => {
+			    this.toast_show(event.event + "|" + event.data , true ) ;
 			})
 	};
 
@@ -108,7 +108,9 @@ export default class Index extends Vue {
 		let el = document.querySelector(".pointerWrap") as HTMLDivElement;
 
 		let deg = 360 * 3 + 60 * i;
+
 		el.style.transition = "transform 3s ease";
+
 		el.style.transform = "rotate(" + deg + "deg)";
 
 		setTimeout(() => {
