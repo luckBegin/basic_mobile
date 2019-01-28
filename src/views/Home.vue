@@ -2,22 +2,31 @@
 	<div class="home">
 		<img alt="Vue logo" src="../assets/logo.png">
 		<HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+		<form id="form">
+			<input type="text" formcontrol = 'data' v-model="form.controls.data.value">
+			{{ form.controls.data.value }}
+			<span>
+				{{ form.controls.data.valid }}
+			</span>
+		</form>
+		<button @click="submit()"> 确定 </button>
 	</div>
 </template>
 
 <script lang="ts">
-
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
-import {HTTP, HttpHeaders, HttpParams} from "@/service/BasicHttp.class";
-import { RESPONSE } from '@/model';
-import { JsBridgeService  , JsCallService } from '@/service/device';
+import HelloWorld from "@/components/HelloWorld.vue";
+import { FormGroup } from '@/utils/form'
+import { Validators } from '@/utils/form/Validator';
 @Component({
 	components: {
 		HelloWorld,
 	},
 })
 export default class Home extends Vue {
+    form : FormGroup = new FormGroup({
+        data : [ ""  , [ Validators.required ] ]
+	});
     created() : void {
         // HTTP.setHeader("Accept-Language" ,"en-us")
 		//
@@ -36,12 +45,11 @@ export default class Home extends Vue {
 		// 	})
 		//
 		// JsBridgeService.getNum() ;
-		const event$ = JsCallService.event$
-			.subscribe( event => {
-			    console.log(event) ;
-			});
+	}
 
-		// event$.unsubscribe() ;
+    submit() :void{
+        this.form.patchValue({ data : 123 }) ;
+        // console.log( this.form.value() ) ;
 	}
 }
 </script>
