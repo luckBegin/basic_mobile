@@ -3,14 +3,13 @@
 		<img alt="Vue logo" src="../assets/logo.png">
 		<HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
 		<form id="form">
-			<input type="text" v-model="form.controls.data.value">
 			<input type="text" v-model="form.controls.info.value">
 			{{ form.controls.data.info }}
 			<span>
 				{{ form.valid }}
 			</span>
 		</form>
-		<button @click="submit()"> 确定 </button>
+		<el-button type="primary">主要按钮</el-button>
 	</div>
 </template>
 

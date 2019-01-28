@@ -82,8 +82,8 @@ export default class Index extends Vue {
 	created(): void {
 		this.fadeNum();
 		JsCallService.event$
-			.subscribe( event => {
-			    console.log(event) ;
+			.subscribe( (event : any ) => {
+			    // this.toast_show( event.event + "|" + event.data , true) ;
 			})
 	};
 
