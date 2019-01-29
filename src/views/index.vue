@@ -88,7 +88,10 @@ export default class Index extends Vue {
 	};
 
 	close_toast() :void {
-		window.location.reload();
+	    this.toast_control = false ;
+        let el = document.querySelector(".pointerWrap") as HTMLDivElement;
+        el.style.transition = "transform 0s ease";
+        el.style.transform = "rotate(" + 0 + "deg)";
 	};
 
 	toast_show(str: string, mark: boolean) : void {
