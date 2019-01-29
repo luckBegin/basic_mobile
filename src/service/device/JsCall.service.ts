@@ -1,11 +1,9 @@
 import { Subject } from 'rxjs';
-
 class JsCall {
 
     public readonly event$  : Subject< any > = new Subject() ;
 
-    constructor(){
-    }
+    constructor(){};
 
     public JSCALL( eventName : string , data : any){
         const _this = this ;

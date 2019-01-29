@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { ajax } from 'rxjs/ajax' ;
 import { RESPONSE } from '@/model'
-import {ObjectUtil} from '@/utils/object.util';
+import { ObjectUtil } from '@/utils/object.util';
 
 export  class HttpHeaders{
     private headers : { [key : string] : string } = {} ;
