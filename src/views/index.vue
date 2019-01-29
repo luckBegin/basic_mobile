@@ -106,7 +106,7 @@ export default class Index extends Vue {
 	    if(count > 3 ){
 	        this.toast_show("抽奖次数耗尽" , true );
 	        return ;
-		};
+		}
 
 		let el = document.querySelector(".pointerWrap") as HTMLDivElement;
 
