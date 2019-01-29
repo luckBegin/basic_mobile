@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { control } from './FormBuilder' ;
+import { control } from './FormControl' ;
 
 export class Validators {
 
@@ -29,6 +29,7 @@ export class Validators {
             });
         }
     }
+
     static required( control : control ) : Observable< boolean > {
         return new Observable( obsr => {
             const value : any = control.value ;

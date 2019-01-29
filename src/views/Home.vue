@@ -4,30 +4,33 @@
 		<HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
 		<form id="form">
 			<input type="text" v-model="form.controls.data.value">
-			<input type="text" v-model="form.controls.info.value">
-			{{ form.controls.data.info }}
-			<span>
-				{{ form.valid }}
-			</span>
+			<div v-for="item in form.controls.arr.controls">
+				<input type="text" v-model="item.controls.name.value">
+				{{ item.controls.name.value }}
+			</div>
+			<span> {{ form.valid }}</span>
 		</form>
-		<button @click="submit()"> 确定 </button>
+		<button :disabled="!form.valid" @click="submit()"> 确定 </button>
 	</div>
 </template>
 
 <script lang="ts">
+
 import { Component, Vue } from "vue-property-decorator";
 import HelloWorld from "@/components/HelloWorld.vue";
-import { FormGroup } from '@/utils/form'
-import { Validators } from '@/utils/form/Validator';
+import { FormBuilder , FormGroup , Validators } from "@/utils/form";
+
 @Component({
 	components: {
 		HelloWorld,
 	},
 })
 export default class Home extends Vue {
-    form : FormGroup = new FormGroup({
-        info : [ ""  , [ Validators.min(5) ] ] ,
+    form : FormGroup = FormBuilder.group({
         data : [ ""  , [ Validators.required ] ] ,
+		arr : FormBuilder.array( [
+            { name : [null , [ Validators.min(5)] ] }
+        ])
 	});
     created() : void {
         // HTTP.setHeader("Accept-Language" ,"en-us")
@@ -50,8 +53,7 @@ export default class Home extends Vue {
 	}
 
     submit() :void{
-        // this.form.patchValue({ data : 123 }) ;
-        console.log( this.form ) ;
+        console.log(this.form.value()) ;
 	}
 }
 </script>
