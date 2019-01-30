@@ -1,5 +1,6 @@
 import { combineLatest , Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
 export interface control{
     value : any ;
     valid : boolean ;
@@ -41,7 +42,6 @@ export class FormControl implements control{
             .pipe( debounceTime(200) )
             .subscribe( data => {
                 const obsrs : any[] = [] ;
-
                 this.validators.forEach( item => {
                     obsrs.push( item( this ) ) ;
                 });

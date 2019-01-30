@@ -24,7 +24,7 @@ export class Storage{
 
     get( key : string ) : any {
       // @ts-ignore
-        const value = this.storage[key];
+      const value = this.storage[key];
       try{
         return JSON.parse(value);
       }catch(e){

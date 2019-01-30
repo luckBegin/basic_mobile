@@ -40,4 +40,12 @@ export class Validators {
             };
         });
     }
+
+    static phone( control : control ) : Observable< boolean>{
+        const value = control.value ;
+        const reg = /^1[346578]\d{9}$/ ;
+        return new Observable( obsr => {
+            obsr.next( reg.test(value)) ;
+        })
+    }
 }

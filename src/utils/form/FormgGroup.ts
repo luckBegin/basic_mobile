@@ -1,6 +1,6 @@
-import {Subject} from 'rxjs';
+import { Subject } from 'rxjs';
 import { FormControl } from './FormControl' ;
-import {FormArray} from '@/utils/form/FormArray';
+import { FormArray } from '@/utils/form/FormArray';
 
 export class FormGroup {
 
@@ -19,7 +19,7 @@ export class FormGroup {
             this.init() ;
         }
         else
-            throw new Error("Invalid form input")
+            throw new Error("Invalid form input") ;
 
         this.event$
             .subscribe( data => {
@@ -53,9 +53,7 @@ export class FormGroup {
             }else{
                 const value = config[0] ;
 
-                const control = new FormControl( value , config[1] , this.event$ , key ) ;
-
-                this.controls[key] = control  ;
+                this.controls[key] = new FormControl( value , config[1] , this.event$ , key ) ;
             };
         });
     };
