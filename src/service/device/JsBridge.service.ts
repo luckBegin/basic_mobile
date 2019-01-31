@@ -7,7 +7,7 @@ class JsBridge{
         return reg.test( window.navigator.userAgent ) ;
     };
 
-    private isAndroid : boolean = this.DeviceDetect("Android") ;
+    public isAndroid : boolean = this.DeviceDetect("Android") ;
 
     getNum() : void {
         if(this.isAndroid){

@@ -37,7 +37,8 @@
 				<div>
 					<p>1.本次抽奖为春节福气抽奖。预祝大家新年快乐，满载而归。</p>
 					<p>2.抽奖截止时间为农历一月十五（新历2月19日）。下期抽奖时间请留意APP内公告，或我司OA界面。</p>
-					<p>3.本次抽奖，奖品均为我司承担，与其他任何机构或公司无关。</p>
+					<p v-if="isAndroid">3.本次抽奖，奖品均为我司承担，与其他任何机构或公司无关。</p>
+					<p v-if="!isAndroid">3.本次抽奖，由我司举办与苹果或其它公司无关，奖品也由我司提供，与苹果和其它公司无关。</p>
 					<p>4.本次活动中奖后，1至2个工作日，工作人员会与您取得联系，请确保您的通讯正常。奖品会在7至15个工作日送达。</p>
 					<p>5.每位贵宾与我司工作人员均能参加三次抽奖。</p>
 				</div>
@@ -55,8 +56,8 @@
 
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator";
-import {JsCallService} from "@/service/device";
-import {LocalStorageService} from '@/service/storage';
+import { JsBridgeService  } from "@/service/device";
+import { LocalStorageService} from '@/service/storage';
 function randomNum(minNum: any, maxNum: any): any {
 	switch (arguments.length) {
 		case 1:
@@ -78,13 +79,10 @@ export default class Index extends Vue {
 	toast_control = false;
 	toast_title = "";
 	awardFirst: any[] = [];
-
+    isAndroid : boolean = false;
 	created(): void {
 		this.fadeNum();
-		JsCallService.event$
-			.subscribe( (event : any) => {
-			    this.toast_show(event.event + "|" + event.data , true ) ;
-			})
+		this.isAndroid = JsBridgeService.isAndroid ;
 	};
 
 	close_toast() :void {
